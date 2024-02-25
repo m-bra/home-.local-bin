@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if test -z "${1}"
+then
+	echo "Usage: $(basename ${0}) <filename> <commands>..."
+	exit
+fi
+
+exe="$HOME/.local/bin/${1}"
+
+if test -e "${exe}"
+then 
+    echo "File already exists."
+    exit
+fi
+
+echo '#!/bin/bash' > "${exe}"
+chmod +x "${exe}"
+
+shift
+
+echo "$@" >> ${exe}
